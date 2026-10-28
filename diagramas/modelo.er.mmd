@@ -1,0 +1,47 @@
+erDiagram
+    %% Comentário: Uma UPA possui um ou mais setores
+    UPA ||--o{ SETOR : "possui"
+    
+    %% Comentário: Uma UPA registra vários atendimentos
+    UPA ||--o{ ATENDIMENTO : "realiza"
+    
+    %% Comentário: Um paciente possui um ou mais registros de atendimento ao longo do tempo
+    PACIENTE ||--o{ ATENDIMENTO : "possui"
+    
+    %% Comentário: Um atendimento é classificado por uma categoria de risco
+    CLASSIFICACAO_RISCO ||--o{ ATENDIMENTO : "classifica"
+
+    UPA {
+        int id PK
+        string nome
+        string endereco
+    }
+
+    SETOR {
+        int id PK
+        int UPA_id FK
+        string nome
+    }
+
+    CLASSIFICACAO_RISCO {
+        int id PK
+        string cor
+        string descricao
+    }
+
+    PACIENTE {
+        int id PK
+        string nome
+        string cartao_sus
+        date data_nascimento
+    }
+
+    ATENDIMENTO {
+        int id PK
+        int paciente_id FK
+        int UPA_id FK
+        int classificacao_risco_id FK
+        time hora_chegada
+        time hora_atendimento
+        string status
+    }
